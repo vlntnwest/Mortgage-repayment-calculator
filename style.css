@@ -1,0 +1,32 @@
+* {
+  box-sizing: border-box;
+}
+.input {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  width: fit-content;
+  transition: border-color 0.3s;
+}
+.input.focused {
+  border-color: #4a90e2;
+}
+.input-field {
+  width: 100%;
+  border: none;
+  padding: 10px;
+  outline: none;
+  flex: 1;
+}
+
+.input-field:focus {
+  outline: none;
+}
+.symbol {
+  background-color: #e6f4fa;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
