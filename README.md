@@ -30,7 +30,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://vlntnwest.github.io/frontendMentor---Mortgage-repayment-calculator/)
+- Live Site URL: [Live site](https://vlntnwest.github.io/frontendMentor---Mortgage-repayment-calculator/)
 
 ## My process
 
@@ -38,5 +38,6 @@ Users should be able to:
 
 - Semantic HTML5 markup
 - CSS custom properties
+- Vanilla JS
 - Flexbox
 - CSS Grid
