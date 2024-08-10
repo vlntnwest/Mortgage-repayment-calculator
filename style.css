@@ -1,7 +1,7 @@
 * {
   box-sizing: border-box;
 }
-.input {
+.input-container {
   display: flex;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -9,7 +9,7 @@
   width: fit-content;
   transition: border-color 0.3s;
 }
-.input.focused {
+.input-container.focused {
   border-color: #4a90e2;
 }
 .input-field {
