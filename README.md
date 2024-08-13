@@ -31,7 +31,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Solution URL: [Solution]([https://your-solution-url.com](https://www.frontendmentor.io/solutions/mortgage-repayment-calculator-NOf5WFNHus))
 - Live Site URL: [Live site](https://vlntnwest.github.io/frontendMentor---Mortgage-repayment-calculator/)
 
 ## My process
