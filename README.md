@@ -26,6 +26,7 @@ Users should be able to:
 ### Screenshot
 
 ![](./preview.jpg)
+![](./result.jpg)
 
 ### Links
 
@@ -40,4 +41,3 @@ Users should be able to:
 - CSS custom properties
 - Vanilla JS
 - Flexbox
-- CSS Grid

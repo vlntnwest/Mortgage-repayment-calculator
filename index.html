@@ -23,61 +23,77 @@
           <button onclick="resetInputs()">Clear All</button>
         </header>
         <form id="form" action="#">
-          <label for="amount">Mortgage Amount</label>
-          <div class="input-container">
-            <div class="symbol">£</div>
-            <input
-              type="number"
-              name="amount"
-              id="mortageAmount"
-              class="input-field"
-              min="0"
-            />
+          <div class="amount-container">
+            <label for="amount">Mortgage Amount</label>
+            <div class="input-container">
+              <div class="symbol">£</div>
+              <input
+                type="number"
+                name="amount"
+                id="mortgageAmount"
+                class="input-field"
+                min="0"
+              />
+            </div>
+            <div id="error-amount" class="error"></div>
           </div>
-          <div id="error-amount" class="error"></div>
-          <label for="term">Mortgage Term</label>
-          <div class="input-container">
-            <input
-              type="number"
-              name="term"
-              id="mortageTerm"
-              class="input-field"
-              min="0"
-            />
-            <div class="symbol">years</div>
+
+          <div class="term-rate-container">
+            <div class="left">
+              <label for="term">Mortgage Term</label>
+              <div class="input-container">
+                <input
+                  type="number"
+                  name="term"
+                  id="mortgageTerm"
+                  class="input-field"
+                  min="0"
+                />
+                <div class="symbol">years</div>
+              </div>
+              <div id="error-duration" class="error"></div>
+            </div>
+            <div class="right">
+              <label for="rate">Interest Rate</label>
+              <div class="input-container">
+                <input
+                  type="number"
+                  name="rate"
+                  id="mortgageRate"
+                  class="input-field"
+                  min="0"
+                  step=".01"
+                />
+                <div class="symbol">%</div>
+              </div>
+              <div id="error-rate" class="error"></div>
+            </div>
           </div>
-          <div id="error-duration" class="error"></div>
-          <label for="rate">Interest Rate</label>
-          <div class="input-container">
-            <input
-              type="number"
-              name="rate"
-              id="mortageRate"
-              class="input-field"
-              min="0"
-              step=".01"
-            />
-            <div class="symbol">%</div>
-          </div>
-          <div id="error-rate" class="error"></div>
           <div class="radio-buttons">
-            <p>Mortgage Type</p>
-            <input
-              type="radio"
-              name="mortageType"
-              id="repaymentRadio"
-              class="input-container"
-            />
-            <label for="repayment">Repayment</label>
-            <input
-              type="radio"
-              name="mortageType"
-              id="interestRadio"
-              class="input-container"
-            />
-            <label for="Interest">Interest Only</label>
+            <label>Mortgage Type</label>
+
+            <label class="btn-container">
+              <input
+                type="radio"
+                name="mortgageType"
+                id="repaymentRadio"
+                class="radio-btn"
+              />
+              Repayment
+            </label>
+
+            <label class="btn-container">
+              <input
+                type="radio"
+                name="mortgageType"
+                id="interestRadio"
+                class="radio-btn"
+              />
+              Interest Only
+            </label>
+
+            <div id="error-type" class="error"></div>
           </div>
-          <div id="error-type" class="error"></div>
 
           <button type="submit" id="submitForm">
             <img src="./assets/images/icon-calculator.svg" alt="" />
@@ -100,11 +116,11 @@
         <!-- Empty results end -->
       </div>
     </div>
-    <div class="attribution">
+    <!-- <div class="attribution">
       Challenge by
       <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
       Coded by <a href="https://github.com/vlntnwest">vlntnwest</a>.
-    </div>
+    </div> -->
   </body>
   <script src="./main.js"></script>
 </html>

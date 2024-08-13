@@ -1,16 +1,108 @@
+:root {
+  --white: hsl(0 0 100);
+  --slate100: hsl(202 86 94);
+  --slate300: hsl(203 41 72);
+  --slate500: hsl(200 26 54);
+  --slate700: hsl(200 24 40);
+  --slate900: hsl(202 55 16);
+  --lime: hsl(61 70 52);
+  --red: hsl(4 69 50);
+  --weightRegular: 500;
+  --weightSemiBold: 700;
+  --fontSizeBody: 16px;
+  --paddingXS: 8px;
+  --paddingS: 16px;
+  --paddingM: 24px;
+  --paddingL: 32px;
+  --paddingXL: 40px;
+}
+
+@font-face {
+  font-family: PlusJakartaSans;
+  src: url("./assets/fonts/PlusJakartaSans-VariableFont_wght.ttf");
+}
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: var(--fontSizeBody);
+  font-family: PlusJakartaSans;
+}
+a:visited,
+a {
+  color: var(--slate900);
+  text-decoration: none;
+}
+body {
+  background-color: var(--slate100);
+  font-size: 16px;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+h1 {
+  font-size: 24px;
+}
+h2 {
+  font-size: 24px;
+  margin-bottom: var(--paddingS);
+}
+h3 {
+  font-size: 16px;
+  color: var(--slate500);
+  font-weight: var(--weightRegular);
+  margin-bottom: var(--paddingS);
+}
+button {
+  border: none;
+  background-color: transparent;
+  text-decoration: underline;
+  cursor: pointer;
+  color: var(--slate700);
+  width: fit-content;
+}
+button:active {
+  color: var(--slate500);
+}
+input {
+  font-weight: var(--weightSemiBold);
+  color: var(--slate900);
+}
+label {
+  color: var(--slate700);
+}
+.card {
+  display: flex;
+  background-color: var(--white);
+  border-radius: 20px;
+  margin: 0 var(--paddingXL);
+  overflow: hidden;
+  max-width: 1000px;
+}
+.left-part {
+  padding: var(--paddingXL);
+  width: 50%;
+  color: var(--slate900);
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--paddingXL);
 }
 .input-container {
   display: flex;
-  border: 1px solid #ccc;
+  border: 1px solid var(--slate500);
   border-radius: 4px;
   overflow: hidden;
-  width: fit-content;
+  width: 100%;
   transition: border-color 0.3s;
+  margin: var(--paddingXS) 0 0;
+  transition: 0.3s ease;
 }
 .input-container.focused {
-  border-color: #4a90e2;
+  border-color: var(--lime);
 }
 .input-field {
   width: 100%;
@@ -19,14 +111,210 @@
   outline: none;
   flex: 1;
 }
-
 .input-field:focus {
   outline: none;
 }
 .symbol {
-  background-color: #e6f4fa;
-  padding: 0 10px;
+  background-color: var(--slate100);
+  padding: 0 16px;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: 0.3s ease;
+}
+.input-container.focused .symbol {
+  background-color: var(--lime);
+}
+.amount-container {
+  margin-bottom: var(--paddingS);
+}
+.term-rate-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+.term-rate-container .left,
+.term-rate-container .right {
+  width: 50%;
+  margin-bottom: var(--paddingS);
+}
+.radio-buttons {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--paddingS);
+}
+.btn-container {
+  display: flex;
+  justify-content: flex-start;
+  border: 1px solid var(--slate500);
+  padding: 10px;
+  gap: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin: var(--paddingXS) 0 0;
+  font-weight: var(--weightSemiBold);
+  color: var(--slate900);
+}
+.btn-container.focused {
+  border: 1px solid var(--lime);
+  background-color: hsl(61 70 52 / 25%);
+}
+.radio-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--slate700);
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.radio-btn:checked {
+  background-color: transparent;
+  border: 1px solid var(--lime);
+}
+.radio-btn:checked:before {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: var(--lime);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.error {
+  color: var(--red);
+  font-size: 12px;
+  padding: 4px 0;
+  margin-top: 4px;
+}
+.input-error {
+  background-color: var(--red);
+  color: var(--white);
+}
+#submitForm {
+  background-color: var(--lime);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 32px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: var(--weightSemiBold);
+  color: var(--slate900);
+}
+.right-part {
+  padding: var(--paddingXL);
+  width: 50%;
+  background-color: var(--slate900);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom-left-radius: 75px;
+}
+.empty-result {
+  text-align: center;
+}
+.empty-result .img-container {
+  margin-bottom: var(--paddingL);
+}
+.empty-result p {
+  color: var(--slate500);
+  font-size: 14px;
+}
+.completed-result p {
+  color: var(--slate500);
+  margin-bottom: var(--paddingL);
+}
+.result-container {
+  position: relative;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.215);
+  border-radius: 5px;
+  overflow: hidden;
+  padding: var(--paddingL);
+  display: flex;
+  flex-direction: column;
+  gap: var(--paddingXL);
+}
+.result-container::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: var(--lime);
+  top: 0;
+  left: 0;
+}
+.top-part {
+  position: relative;
+}
+.top-part::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background-color: var(--slate500);
+  transform: translate(-50%, -50%);
+  bottom: calc(var(--paddingXL) / -2);
+  left: 50%;
+}
+#monthlyRepaymentsResult {
+  font-size: 50px;
+  font-weight: var(--weightSemiBold);
+  color: var(--lime);
+}
+#totalDueOverTerm {
+  font-size: 20px;
+  font-weight: var(--weightSemiBold);
+  color: var(--white);
+}
+
+@media screen and (max-width: 850px) {
+  header {
+    flex-direction: column;
+  }
+  h1 {
+    margin-bottom: var(--paddingXS);
+  }
+  .term-rate-container {
+    flex-direction: column;
+    gap: 0;
+  }
+  .term-rate-container .left,
+  .term-rate-container .right {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 730px) {
+  .card {
+    flex-direction: column;
+    margin: var(--paddingM);
+  }
+  .left-part,
+  .right-part {
+    width: 100%;
+  }
+  .right-part {
+    border-bottom-left-radius: 0;
+  }
+}
+@media screen and (max-width: 500px) {
+  body {
+    display: block;
+  }
+  .card {
+    margin: 0;
+    border-radius: 0;
+  }
+  #submitForm {
+    margin: 0 auto;
+    width: 100%;
+  }
 }
