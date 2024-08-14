@@ -54,10 +54,22 @@ function applyTranslations(translations) {
       translations.total_over_term_title;
   }
 
-  // Faites de même pour tous les autres textes
+  if (errorElements.amount) {
+    errorElements.amount.textContent = translations.error_required;
+  }
+  if (errorElements.rate) {
+    errorElements.rate.textContent = translations.error_required;
+  }
+  if (errorElements.duration) {
+    errorElements.duration.textContent = translations.error_required;
+  }
+  if (errorElements.type) {
+    errorElements.type.textContent = translations.error_required;
+  }
 }
 
-let selectedLang = "en"; // Langue par défaut
+let selectedLang = "en";
+let errorElements = {};
 
 document.getElementById("languageSelector").addEventListener("change", (e) => {
   selectedLang = e.target.value;
@@ -100,6 +112,7 @@ removeErrors = () => {
   document.querySelectorAll(".symbol").forEach((symbol) => {
     symbol.classList.remove("input-error");
   });
+  errorElements = {};
 };
 
 form.addEventListener("submit", (e) => {
@@ -117,8 +130,8 @@ form.addEventListener("submit", (e) => {
     let valid = true;
 
     if (!amountValue) {
-      document.getElementById("error-amount").textContent =
-        "This field is required";
+      errorElements.amount = document.getElementById("error-amount");
+      errorElements.amount.textContent = translations.error_required;
 
       // Cible le conteneur de l'input
       const inputContainer = mortgageAmount.closest(".input-container");
@@ -136,8 +149,8 @@ form.addEventListener("submit", (e) => {
     }
 
     if (!rateValue) {
-      document.getElementById("error-rate").textContent =
-        "This field is required";
+      errorElements.rate = document.getElementById("error-rate");
+      errorElements.rate.textContent = translations.error_required;
 
       // Cible le conteneur de l'input
       const inputContainer = mortgageRate.closest(".input-container");
@@ -155,8 +168,8 @@ form.addEventListener("submit", (e) => {
     }
 
     if (!duration) {
-      document.getElementById("error-duration").textContent =
-        "This field is required";
+      errorElements.duration = document.getElementById("error-duration");
+      errorElements.duration.textContent = translations.error_required;
 
       // Cible le conteneur de l'input
       const inputContainer = mortgageTerm.closest(".input-container");
@@ -174,24 +187,22 @@ form.addEventListener("submit", (e) => {
     }
 
     if (!mortgageType) {
-      document.getElementById("error-type").textContent =
-        "This field is required";
+      errorElements.type = document.getElementById("error-type");
+      errorElements.type.textContent = translations.error_required;
       valid = false;
     }
 
     if (!valid) {
       resultContainer.style.alignItems = "center";
       resultContainer.innerHTML = `
-        <div class="empty-result">
+         <div class="empty-result" id="emptyResult">
           <div class="img-container">
             <img src="./assets/images/illustration-empty.svg" alt="" />
           </div>
-          <h2>Results shown here</h2>
-          <p>
-            Complete the form and click “calculate repayments” to see what your
-            monthly repayments would be.
-          </p>
-        </div>`;
+          <h2 id="yourResultsTitle"></h2>
+          <p id="emptyResultsText"></p>
+        </div>
+        `;
       loadLanguage(selectedLang).then((translations) => {
         applyTranslations(translations);
       });
@@ -270,6 +281,69 @@ form.addEventListener("submit", (e) => {
   });
 });
 
+document.getElementById("languageSelector").addEventListener("change", (e) => {
+  selectedLang = e.target.value;
+  loadLanguage(selectedLang).then((translations) => {
+    applyTranslations(translations);
+
+    const completedResult = document.getElementById("completedResult");
+    if (completedResult) {
+      const amountValue = mortgageAmount.value;
+      const duration = mortgageTerm.value;
+      const rateValue = mortgageRate.value;
+      const mortgageType = document.querySelector(
+        'input[name="mortgageType"]:checked'
+      );
+
+      const locale = translations.locale;
+      const currency = translations.currency;
+
+      if (mortgageType) {
+        let monthlyPayment = calculMonthlyPayment(
+          amountValue,
+          duration,
+          rateValue
+        );
+        let monthlyInterest = calculMonthlyInterest(amountValue, rateValue);
+
+        if (repaymentRadio.checked) {
+          document.getElementById("monthlyRepaymentsResult").textContent = (
+            monthlyPayment * 1
+          ).toLocaleString(locale, {
+            style: "currency",
+            currency: currency,
+          });
+
+          document.getElementById("totalDueOverTerm").textContent = (
+            monthlyPayment *
+            12 *
+            duration
+          ).toLocaleString(locale, {
+            style: "currency",
+            currency: currency,
+          });
+        } else if (interestRadio.checked) {
+          document.getElementById("monthlyRepaymentsResult").textContent = (
+            monthlyInterest * 1
+          ).toLocaleString(locale, {
+            style: "currency",
+            currency: currency,
+          });
+
+          document.getElementById("totalDueOverTerm").textContent = (
+            monthlyInterest *
+            12 *
+            duration
+          ).toLocaleString(locale, {
+            style: "currency",
+            currency: currency,
+          });
+        }
+      }
+    }
+  });
+});
+
 //Clear inputs
 const resetInputs = (e) => {
   mortgageAmount.value = "";
@@ -283,6 +357,19 @@ const resetInputs = (e) => {
   });
   document.querySelectorAll(".symbol").forEach((symbol) => {
     symbol.classList.remove("input-error");
+  });
+  resultContainer.style.alignItems = "center";
+  resultContainer.innerHTML = `
+         <div class="empty-result" id="emptyResult">
+          <div class="img-container">
+            <img src="./assets/images/illustration-empty.svg" alt="" />
+          </div>
+          <h2 id="yourResultsTitle"></h2>
+          <p id="emptyResultsText"></p>
+        </div>
+        `;
+  loadLanguage(selectedLang).then((translations) => {
+    applyTranslations(translations);
   });
 };
 
