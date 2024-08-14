@@ -6,6 +6,61 @@ const mortgageAmount = document.getElementById("mortgageAmount");
 const mortgageTerm = document.getElementById("mortgageTerm");
 const mortgageRate = document.getElementById("mortgageRate");
 
+async function loadLanguage(lang) {
+  const response = await fetch(`./lang/${lang}.json`);
+  const translations = await response.json();
+  return translations;
+}
+
+function applyTranslations(translations) {
+  document.querySelector("h1").textContent = translations.title;
+  document.querySelector("button").textContent = translations.clear_button;
+  document.querySelector('label[for="amount"]').textContent =
+    translations.amount_label;
+  document.querySelector('label[for="term"]').textContent =
+    translations.term_label;
+  document.querySelector('label[for="rate"]').textContent =
+    translations.rate_label;
+  document.querySelector('label[for="type"]').textContent =
+    translations.type_label;
+  document.getElementById("repaymentText").textContent =
+    translations.repayment_label;
+  document.getElementById("interestsText").textContent =
+    translations.interests_label;
+  document.getElementById("moneySymbol").textContent =
+    translations.money_symbol;
+  document.getElementById("durationSymbol").textContent =
+    translations.duration_symbol;
+  document.getElementById("calculBtnText").textContent =
+    translations.calculate_button;
+  document.getElementById("yourResultsTitle").textContent =
+    translations.results_title;
+  const emptyResultsText = document.getElementById("emptyResultsText");
+  if (emptyResultsText) {
+    emptyResultsText.textContent = translations.empty_results_text;
+  }
+  const resultsTextElement = document.getElementById("resultsText");
+  if (resultsTextElement) {
+    resultsTextElement.textContent = translations.results_text;
+  }
+
+  // Faites de même pour tous les autres textes
+}
+
+let selectedLang = "en"; // Langue par défaut
+
+document.getElementById("languageSelector").addEventListener("change", (e) => {
+  selectedLang = e.target.value;
+  loadLanguage(selectedLang).then((translations) => {
+    applyTranslations(translations);
+  });
+});
+
+// Chargement initial avec la langue par défaut
+loadLanguage(selectedLang).then((translations) => {
+  applyTranslations(translations);
+});
+
 const calculMonthlyPayment = (amountValue, duration, rateValue) => {
   let monthlyRate = rateValue / 100 / 12;
   let numberOfPayments = duration * 12;
@@ -40,81 +95,83 @@ removeErrors = () => {
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   removeErrors();
-  let amountValue = mortgageAmount.value;
-  let duration = mortgageTerm.value;
-  let rateValue = mortgageRate.value;
-  let mortgageType = document.querySelector(
-    'input[name="mortgageType"]:checked'
-  );
+  const selectedLang = document.getElementById("languageSelector").value;
+  loadLanguage(selectedLang).then((translations) => {
+    let amountValue = mortgageAmount.value;
+    let duration = mortgageTerm.value;
+    let rateValue = mortgageRate.value;
+    let mortgageType = document.querySelector(
+      'input[name="mortgageType"]:checked'
+    );
 
-  let valid = true;
+    let valid = true;
 
-  if (!amountValue) {
-    document.getElementById("error-amount").textContent =
-      "This field is required";
+    if (!amountValue) {
+      document.getElementById("error-amount").textContent =
+        "This field is required";
 
-    // Cible le conteneur de l'input
-    const inputContainer = mortgageAmount.closest(".input-container");
+      // Cible le conteneur de l'input
+      const inputContainer = mortgageAmount.closest(".input-container");
 
-    // Ajouter une bordure rouge au conteneur de l'input
-    inputContainer.style.border = "1px solid var(--red)";
+      // Ajouter une bordure rouge au conteneur de l'input
+      inputContainer.style.border = "1px solid var(--red)";
 
-    // Modifier l'arrière-plan du symbole à l'intérieur du même conteneur
-    const symbolElement = inputContainer.querySelector(".symbol");
-    if (symbolElement) {
-      symbolElement.classList.add("input-error");
+      // Modifier l'arrière-plan du symbole à l'intérieur du même conteneur
+      const symbolElement = inputContainer.querySelector(".symbol");
+      if (symbolElement) {
+        symbolElement.classList.add("input-error");
+      }
+
+      valid = false;
     }
 
-    valid = false;
-  }
+    if (!rateValue) {
+      document.getElementById("error-rate").textContent =
+        "This field is required";
 
-  if (!rateValue) {
-    document.getElementById("error-rate").textContent =
-      "This field is required";
+      // Cible le conteneur de l'input
+      const inputContainer = mortgageRate.closest(".input-container");
 
-    // Cible le conteneur de l'input
-    const inputContainer = mortgageRate.closest(".input-container");
+      // Ajouter une bordure rouge au conteneur de l'input
+      inputContainer.style.border = "1px solid var(--red)";
 
-    // Ajouter une bordure rouge au conteneur de l'input
-    inputContainer.style.border = "1px solid var(--red)";
+      // Modifier l'arrière-plan du symbole à l'intérieur du même conteneur
+      const symbolElement = inputContainer.querySelector(".symbol");
+      if (symbolElement) {
+        symbolElement.classList.add("input-error");
+      }
 
-    // Modifier l'arrière-plan du symbole à l'intérieur du même conteneur
-    const symbolElement = inputContainer.querySelector(".symbol");
-    if (symbolElement) {
-      symbolElement.classList.add("input-error");
+      valid = false;
     }
 
-    valid = false;
-  }
+    if (!duration) {
+      document.getElementById("error-duration").textContent =
+        "This field is required";
 
-  if (!duration) {
-    document.getElementById("error-duration").textContent =
-      "This field is required";
+      // Cible le conteneur de l'input
+      const inputContainer = mortgageTerm.closest(".input-container");
 
-    // Cible le conteneur de l'input
-    const inputContainer = mortgageTerm.closest(".input-container");
+      // Ajouter une bordure rouge au conteneur de l'input
+      inputContainer.style.border = "1px solid var(--red)";
 
-    // Ajouter une bordure rouge au conteneur de l'input
-    inputContainer.style.border = "1px solid var(--red)";
+      // Modifier l'arrière-plan du symbole à l'intérieur du même conteneur
+      const symbolElement = inputContainer.querySelector(".symbol");
+      if (symbolElement) {
+        symbolElement.classList.add("input-error");
+      }
 
-    // Modifier l'arrière-plan du symbole à l'intérieur du même conteneur
-    const symbolElement = inputContainer.querySelector(".symbol");
-    if (symbolElement) {
-      symbolElement.classList.add("input-error");
+      valid = false;
     }
 
-    valid = false;
-  }
+    if (!mortgageType) {
+      document.getElementById("error-type").textContent =
+        "This field is required";
+      valid = false;
+    }
 
-  if (!mortgageType) {
-    document.getElementById("error-type").textContent =
-      "This field is required";
-    valid = false;
-  }
-
-  if (!valid) {
-    resultContainer.style.alignItems = "center";
-    resultContainer.innerHTML = `
+    if (!valid) {
+      resultContainer.style.alignItems = "center";
+      resultContainer.innerHTML = `
         <div class="empty-result">
           <div class="img-container">
             <img src="./assets/images/illustration-empty.svg" alt="" />
@@ -125,15 +182,25 @@ form.addEventListener("submit", (e) => {
             monthly repayments would be.
           </p>
         </div>`;
-  } else {
-    let monthlyPayment = calculMonthlyPayment(amountValue, duration, rateValue);
-    let monthlyInterest = calculMonthlyInterest(amountValue, rateValue);
-    resultContainer.style.alignItems = "flex-start";
-    if (repaymentRadio.checked) {
-      resultContainer.innerHTML = `
+      loadLanguage(selectedLang).then((translations) => {
+        applyTranslations(translations);
+      });
+    } else {
+      let monthlyPayment = calculMonthlyPayment(
+        amountValue,
+        duration,
+        rateValue
+      );
+      let monthlyInterest = calculMonthlyInterest(amountValue, rateValue);
+      resultContainer.style.alignItems = "flex-start";
+      const locale = translations.locale;
+      const currency = translations.currency;
+
+      if (repaymentRadio.checked) {
+        resultContainer.innerHTML = `
            <div class="completed-result">
-           <h2>Your results</h2>
-           <p>
+           <h2 id="yourResultsTitle">Your results</h2>
+           <p id="resultsText">
            Your results are shown below based on the information you provided.
            To adjust the results, edit the form and click “calculate
            repayments” again.
@@ -143,9 +210,9 @@ form.addEventListener("submit", (e) => {
            <h3>Your monthly repayments</h3>
            <div id="monthlyRepaymentsResult">${(
              monthlyPayment * 1
-           ).toLocaleString("en-GB", {
+           ).toLocaleString(locale, {
              style: "currency",
-             currency: "GBP",
+             currency: currency,
            })}</div>
             </div>
             <div class="bottom-part">
@@ -154,18 +221,18 @@ form.addEventListener("submit", (e) => {
               monthlyPayment *
               12 *
               duration
-            ).toLocaleString("en-GB", {
+            ).toLocaleString(locale, {
               style: "currency",
-              currency: "GBP",
+              currency: currency,
             })}</div>
             </div>
             </div>
             </div>`;
-    } else if (interestRadio.checked) {
-      resultContainer.innerHTML = `
+      } else if (interestRadio.checked) {
+        resultContainer.innerHTML = `
             <div class="completed-result">
-            <h2>Your results</h2>
-            <p>
+            <h2 id="yourResultsTitle">Your results</h2>
+            <p id="resultsText">
             Your results are shown below based on the information you provided. To
             adjust the results, edit the form and click “calculate repayments”
             again.
@@ -175,9 +242,9 @@ form.addEventListener("submit", (e) => {
             <h3>Your monthly repayments</h3>
             <div id="monthlyRepaymentsResult"> ${(
               monthlyInterest * 1
-            ).toLocaleString("en-GB", {
+            ).toLocaleString(locale, {
               style: "currency",
-              currency: "GBP",
+              currency: currency,
             })}</div>
             </div>
             <div class="bottom-part">
@@ -186,16 +253,19 @@ form.addEventListener("submit", (e) => {
               monthlyInterest *
               12 *
               duration
-            ).toLocaleString("en-GB", {
+            ).toLocaleString(locale, {
               style: "currency",
-              currency: "GBP",
+              currency: currency,
             })}</div>
             </div>
             </div>
-            </div>
-            `;
+            </div>`;
+      }
+
+      // Appliquer les traductions après avoir généré les résultats
+      applyTranslations(translations);
     }
-  }
+  });
 });
 
 //Clear inputs

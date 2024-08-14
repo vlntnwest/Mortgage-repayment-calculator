@@ -1,0 +1,19 @@
+{
+  "title": "Calculateur de Crédit Immobilier",
+  "clear_button": "Tout Effacer",
+  "amount_label": "Montant du Crédit",
+  "term_label": "Durée du Crédit",
+  "rate_label": "Taux d'Intérêt",
+  "type_label": "Type de Crédit",
+  "money_symbol": "€",
+  "duration_symbol": "années",
+  "repayment_label": "Remboursement du capital",
+  "interests_label": "In fine",
+  "calculate_button": "Calculer les Remboursements",
+  "results_title": "Vos résultats",
+  "empty_results_text": "Completez le formulaire et cliqué sur “Calculer les Remboursements” pour connaitre vos mensualitées.",
+  "results_text": "Vos résultats sont affichés ci-dessous en fonction des informations que vous avez fournies. Pour ajuster les résultats, modifiez le formulaire et cliquez à nouveau sur «calculer les remboursements».",
+  "error_required": "Ce champ est obligatoire",
+  "locale": "fr-FR",
+  "currency": "EUR"
+}

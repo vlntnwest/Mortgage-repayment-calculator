@@ -1,0 +1,19 @@
+{
+  "title": "Mortgage Calculator",
+  "clear_button": "Clear All",
+  "amount_label": "Mortgage Amount",
+  "term_label": "Mortgage Term",
+  "rate_label": "Interest Rate",
+  "type_label": "Mortgage Type",
+  "money_symbol": "£",
+  "duration_symbol": "years",
+  "repayment_label": "Repayment",
+  "interests_label": "Interest Only",
+  "calculate_button": "Calculate Repayments",
+  "results_title": "Your results shown here",
+  "empty_results_text": "Complete the form and click “calculate repayments” to see what your monthly repayments would be.",
+  "results_text": " Your results are shown below based on the information you provided. To adjust the results, edit the form and click “calculate repayments” again.",
+  "error_required": "This field is required",
+  "locale": "en-GB",
+  "currency": "GBP"
+}

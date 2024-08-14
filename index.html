@@ -19,14 +19,14 @@
     <div class="card">
       <div class="left-part">
         <header>
-          <h1>Mortgage Calculator</h1>
-          <button onclick="resetInputs()">Clear All</button>
+          <h1>r</h1>
+          <button onclick="resetInputs()"></button>
         </header>
         <form id="form" action="#">
           <div class="amount-container">
-            <label for="amount">Mortgage Amount</label>
+            <label for="amount"></label>
             <div class="input-container">
-              <div class="symbol">£</div>
+              <div id="moneySymbol" class="symbol"></div>
               <input
                 type="number"
                 name="amount"
@@ -40,7 +40,7 @@
 
           <div class="term-rate-container">
             <div class="left">
-              <label for="term">Mortgage Term</label>
+              <label for="term"></label>
               <div class="input-container">
                 <input
                   type="number"
@@ -49,12 +49,12 @@
                   class="input-field"
                   min="0"
                 />
-                <div class="symbol">years</div>
+                <div id="durationSymbol" class="symbol"></div>
               </div>
               <div id="error-duration" class="error"></div>
             </div>
             <div class="right">
-              <label for="rate">Interest Rate</label>
+              <label for="rate"></label>
               <div class="input-container">
                 <input
                   type="number"
@@ -70,26 +70,26 @@
             </div>
           </div>
           <div class="radio-buttons">
-            <label>Mortgage Type</label>
+            <label for="type"></label>
 
-            <label class="btn-container">
+            <label for="repayment" class="btn-container">
               <input
                 type="radio"
                 name="mortgageType"
                 id="repaymentRadio"
                 class="radio-btn"
               />
-              Repayment
+              <span id="repaymentText"></span>
             </label>
 
-            <label class="btn-container">
+            <label for="interest" class="btn-container">
               <input
                 type="radio"
                 name="mortgageType"
                 id="interestRadio"
                 class="radio-btn"
               />
-              Interest Only
+              <span id="interestsText"></span>
             </label>
 
             <div id="error-type" class="error"></div>
@@ -97,9 +97,13 @@
 
           <button type="submit" id="submitForm">
             <img src="./assets/images/icon-calculator.svg" alt="" />
-            Calculate Repayments
+            <span id="calculBtnText"></span>
           </button>
         </form>
+        <select id="languageSelector">
+          <option value="en">English</option>
+          <option value="fr">Français</option>
+        </select>
       </div>
       <div class="right-part" id="resultContainer">
         <!-- Empty results start -->
@@ -107,11 +111,8 @@
           <div class="img-container">
             <img src="./assets/images/illustration-empty.svg" alt="" />
           </div>
-          <h2>Results shown here</h2>
-          <p>
-            Complete the form and click “calculate repayments” to see what your
-            monthly repayments would be.
-          </p>
+          <h2 id="yourResultsTitle"></h2>
+          <p id="emptyResultsText"></p>
         </div>
         <!-- Empty results end -->
       </div>
