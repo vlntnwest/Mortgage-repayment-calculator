@@ -79,7 +79,7 @@ label {
   border-radius: 20px;
   margin: 0 var(--paddingXL);
   overflow: hidden;
-  max-width: 1000px;
+  max-width: 1150px;
 }
 .left-part {
   padding: var(--paddingXL);
@@ -90,6 +90,11 @@ header {
   display: flex;
   justify-content: space-between;
   margin-bottom: var(--paddingXL);
+}
+.language-fr header {
+  display: flex;
+  flex-direction: column;
+  /* autres styles pour les titres en français */
 }
 .input-container {
   display: flex;
@@ -207,6 +212,11 @@ header {
   text-decoration: none;
   font-weight: var(--weightSemiBold);
   color: var(--slate900);
+}
+#languageSelector {
+  border: none;
+  background: transparent;
+  margin-top: var(--paddingM);
 }
 .right-part {
   padding: var(--paddingXL);

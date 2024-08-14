@@ -71,11 +71,23 @@ function applyTranslations(translations) {
 let selectedLang = "en";
 let errorElements = {};
 
+function updateLanguage(lang) {
+  const body = document.body;
+  body.classList.remove("language-en", "language-fr");
+
+  if (lang === "fr") {
+    body.classList.add("language-fr");
+  } else {
+    body.classList.add("language-en");
+  }
+}
+
 document.getElementById("languageSelector").addEventListener("change", (e) => {
   selectedLang = e.target.value;
   loadLanguage(selectedLang).then((translations) => {
     applyTranslations(translations);
   });
+  updateLanguage(selectedLang);
 });
 
 // Chargement initial avec la langue par défaut
