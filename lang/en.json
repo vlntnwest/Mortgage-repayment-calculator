@@ -11,8 +11,11 @@
   "interests_label": "Interest Only",
   "calculate_button": "Calculate Repayments",
   "results_title": "Your results shown here",
+  "results_title_completed": "Your results",
   "empty_results_text": "Complete the form and click “calculate repayments” to see what your monthly repayments would be.",
-  "results_text": " Your results are shown below based on the information you provided. To adjust the results, edit the form and click “calculate repayments” again.",
+  "completed_results_text": " Your results are shown below based on the information you provided. To adjust the results, edit the form and click “calculate repayments” again.",
+  "monthly_repayment_title": "Your monthly repayments",
+  "total_over_term_title": "Total you'll repay over the term",
   "error_required": "This field is required",
   "locale": "en-GB",
   "currency": "GBP"

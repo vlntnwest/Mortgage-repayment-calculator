@@ -35,13 +35,23 @@ function applyTranslations(translations) {
     translations.calculate_button;
   document.getElementById("yourResultsTitle").textContent =
     translations.results_title;
-  const emptyResultsText = document.getElementById("emptyResultsText");
-  if (emptyResultsText) {
-    emptyResultsText.textContent = translations.empty_results_text;
+  const emptyResult = document.getElementById("emptyResult");
+  if (emptyResult) {
+    document.getElementById("emptyResultsText").textContent =
+      translations.empty_results_text;
+    document.getElementById("yourResultsTitle").textContent =
+      translations.results_title;
   }
-  const resultsTextElement = document.getElementById("resultsText");
-  if (resultsTextElement) {
-    resultsTextElement.textContent = translations.results_text;
+  const completedResult = document.getElementById("completedResult");
+  if (completedResult) {
+    document.getElementById("yourResultsTitle").textContent =
+      translations.results_title_completed;
+    document.getElementById("resultsText").textContent =
+      translations.completed_results_text;
+    document.getElementById("monthlyRepaymentsTitle").textContent =
+      translations.monthly_repayment_title;
+    document.getElementById("totalOverTermTitle").textContent =
+      translations.total_over_term_title;
   }
 
   // Faites de même pour tous les autres textes
@@ -198,67 +208,59 @@ form.addEventListener("submit", (e) => {
 
       if (repaymentRadio.checked) {
         resultContainer.innerHTML = `
-           <div class="completed-result">
-           <h2 id="yourResultsTitle">Your results</h2>
-           <p id="resultsText">
-           Your results are shown below based on the information you provided.
-           To adjust the results, edit the form and click “calculate
-           repayments” again.
-           </p>
-           <div class="result-container">
-           <div class="top-part">
-           <h3>Your monthly repayments</h3>
-           <div id="monthlyRepaymentsResult">${(
-             monthlyPayment * 1
-           ).toLocaleString(locale, {
-             style: "currency",
-             currency: currency,
-           })}</div>
-            </div>
-            <div class="bottom-part">
-            <h3>Total you'll repay over the term</h3>
-            <div id="totalDueOverTerm">${(
-              monthlyPayment *
-              12 *
-              duration
-            ).toLocaleString(locale, {
-              style: "currency",
-              currency: currency,
-            })}</div>
-            </div>
-            </div>
+           <div class="completed-result" id="completedResult">
+            <h2 id="yourResultsTitle"></h2>
+            <p id="resultsText"></p>
+            <div class="result-container">
+              <div class="top-part">
+                <h3 id="monthlyRepaymentsTitle"></h3>
+                <div id="monthlyRepaymentsResult">${(
+                  monthlyPayment * 1
+                ).toLocaleString(locale, {
+                  style: "currency",
+                  currency: currency,
+                })}</div>
+                </div>
+                <div class="bottom-part">
+                  <h3 id="totalOverTermTitle"></h3>
+                  <div id="totalDueOverTerm">${(
+                    monthlyPayment *
+                    12 *
+                    duration
+                  ).toLocaleString(locale, {
+                    style: "currency",
+                    currency: currency,
+                  })}</div>
+                </div>
+              </div>
             </div>`;
       } else if (interestRadio.checked) {
         resultContainer.innerHTML = `
-            <div class="completed-result">
-            <h2 id="yourResultsTitle">Your results</h2>
-            <p id="resultsText">
-            Your results are shown below based on the information you provided. To
-            adjust the results, edit the form and click “calculate repayments”
-            again.
-            </p>
-            <div class="result-container">
-            <div class="top-part">
-            <h3>Your monthly repayments</h3>
-            <div id="monthlyRepaymentsResult"> ${(
-              monthlyInterest * 1
-            ).toLocaleString(locale, {
-              style: "currency",
-              currency: currency,
-            })}</div>
-            </div>
-            <div class="bottom-part">
-            <h3>Total you'll repay over the term</h3>
-            <div id="totalDueOverTerm">${(
-              monthlyInterest *
-              12 *
-              duration
-            ).toLocaleString(locale, {
-              style: "currency",
-              currency: currency,
-            })}</div>
-            </div>
-            </div>
+            <div class="completed-result" id="completedResult">
+              <h2 id="yourResultsTitle"></h2>
+              <p id="resultsText"></p>
+              <div class="result-container">
+                <div class="top-part">
+                  <h3 id="monthlyRepaymentsTitle"></h3>
+                  <div id="monthlyRepaymentsResult"> ${(
+                    monthlyInterest * 1
+                  ).toLocaleString(locale, {
+                    style: "currency",
+                    currency: currency,
+                  })}</div>
+                </div>
+                <div class="bottom-part">
+                  <h3 id="totalOverTermTitle"></h3>
+                  <div id="totalDueOverTerm">${(
+                    monthlyInterest *
+                    12 *
+                    duration
+                  ).toLocaleString(locale, {
+                    style: "currency",
+                    currency: currency,
+                  })}</div>
+                </div>
+              </div>
             </div>`;
       }
 
